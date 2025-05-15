@@ -1,0 +1,74 @@
+[package]
+name = "flash_attention_trading"
+version = "0.1.0"
+edition = "2021"
+authors = ["Machine Learning for Trading"]
+description = "FlashAttention-enhanced trading models in Rust"
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/suenot/machine-learning-for-trading"
+keywords = ["trading", "machine-learning", "attention", "transformer", "finance"]
+categories = ["science", "finance"]
+
+[dependencies]
+# Tensor operations
+ndarray = { version = "0.15", features = ["rayon"] }
+ndarray-rand = "0.14"
+
+# Data handling
+polars = { version = "0.35", features = ["lazy", "csv", "json", "temporal"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+# HTTP client for API
+reqwest = { version = "0.11", features = ["json", "blocking"] }
+tokio = { version = "1", features = ["full"] }
+
+# Time handling
+chrono = { version = "0.4", features = ["serde"] }
+
+# Random number generation
+rand = "0.8"
+rand_distr = "0.4"
+
+# Error handling
+anyhow = "1.0"
+thiserror = "1.0"
+
+# Logging
+log = "0.4"
+env_logger = "0.10"
+
+# CLI parsing
+clap = { version = "4.4", features = ["derive"] }
+
+# Parallel processing
+rayon = "1.8"
+
+# Neural network framework (optional - for production)
+# candle-core = { version = "0.3", optional = true }
+# candle-nn = { version = "0.3", optional = true }
+
+[features]
+default = []
+# gpu = ["candle-core/cuda", "candle-nn/cuda"]
+
+[dev-dependencies]
+criterion = "0.5"
+approx = "0.5"
+
+[[example]]
+name = "fetch_data"
+path = "examples/fetch_data.rs"
+
+[[example]]
+name = "train"
+path = "examples/train.rs"
+
+[[example]]
+name = "backtest"
+path = "examples/backtest.rs"
+
+[[bench]]
+name = "attention_benchmark"
+harness = false
